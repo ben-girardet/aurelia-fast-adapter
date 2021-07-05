@@ -2,7 +2,7 @@
   "compilerOptions": {
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "declaration": false,
+    "declaration": true,
     "module": "esnext",
     "moduleResolution": "node",
     "skipLibCheck": true,

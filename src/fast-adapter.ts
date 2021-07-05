@@ -3,11 +3,15 @@ import { IAttrMapper, NodeObserverLocator, AppTask } from '@aurelia/runtime-html
 
 export class FASTAdapter {
 
+  public static valuesTags = ['SELECT', 'SLIDER', 'TEXT-FIELD', 'TEXT-AREA'];
+  public static checkedTags = ['CHECKBOX', 'RADIO', 'RADIO-GROUP', 'MENU-ITEM', 'SWITCH'];
+  public static activeidTags = ['TABS'];
+
   public static register(container: IContainer): void {
     FASTAdapter.extendTemplatingSyntax(container);
   }
 
-  public static customize(config?: {withPrefix: string}) {
+  public static customize(config?: {withPrefix: string}): { register(container: IContainer): void; } {
     return {
         register(container: IContainer): void {
           FASTAdapter.extendTemplatingSyntax(container, config);
@@ -16,43 +20,39 @@ export class FASTAdapter {
   }
 
   private static extendTemplatingSyntax(container: IContainer, config?: {withPrefix: string}): void {
-    const prefix = (config.withPrefix || 'fast').toUpperCase();
+    const prefix = (config?.withPrefix || 'fast').toUpperCase();
+    const tags: {[key: string]: string} = {};
+    const valuePropertyConfig = { events: ['input', 'change'] };
+    const nodeObserverConfig: {[key: string]: {[key: string]: {events: string[]}}} = {};
+
+    for (const tag of FASTAdapter.valuesTags) {
+      const fullTag = `${prefix}-${tag}`;
+      tags[fullTag] = 'value';
+      nodeObserverConfig[fullTag] = {};
+      nodeObserverConfig[fullTag]['value'] = valuePropertyConfig;
+    }
+    for (const tag of FASTAdapter.checkedTags) {
+      const fullTag = `${prefix}-${tag}`;
+      tags[fullTag] = 'checked';
+      nodeObserverConfig[fullTag] = {};
+      nodeObserverConfig[fullTag]['checked'] = valuePropertyConfig;
+    }
+    for (const tag of FASTAdapter.activeidTags) {
+      const fullTag = `${prefix}-${tag}`;
+      tags[fullTag] = 'activeid';
+      nodeObserverConfig[fullTag] = {};
+      nodeObserverConfig[fullTag]['activeid'] = valuePropertyConfig;
+    }
+
+    console.log('tags', tags);
     AppTask.beforeCreate(IContainer, container => {
       const attrSyntaxTransformer = container.get(IAttrMapper);
       const nodeObserverLocator = container.get(NodeObserverLocator);
       attrSyntaxTransformer.useTwoWay((el, property) => {
-        switch (el.tagName) {
-          case `${prefix}-SELECT`:
-          case `${prefix}-SLIDER`:
-          case `${prefix}-TEXT-FIELD`:
-          case `${prefix}-TEXT-AREA`:
-            return property === 'value';
-          case `${prefix}-CHECKBOX`:
-          case `${prefix}-RADIO`:
-          case `${prefix}-RADIO-GROUP`:
-          case `${prefix}-MENU-ITEM`:
-          case `${prefix}-SWITCH`:
-            return property === 'checked';
-          case `${prefix}-TABS`:
-            return property === 'activeid';
-          default:
-            return false;
-        }
+        return property === tags[el.tagName];
       });
       // Teach Aurelia what events to use to observe properties of elements.
-      const valuePropertyConfig = { events: ['input', 'change'] };
-      const observerConfig: {[key: string]: {[key: string]: {events: string[]}}} = {};
-      observerConfig[`${prefix}-CHECKBOX`] = {value: valuePropertyConfig};
-      observerConfig[`${prefix}-RADIO`] = {value: valuePropertyConfig};
-      observerConfig[`${prefix}-RADIO-GROUP`] = {value: valuePropertyConfig};
-      observerConfig[`${prefix}-RADIO-SELECT`] = {value: valuePropertyConfig};
-      observerConfig[`${prefix}-RADIO-SLIDER`] = {value: valuePropertyConfig};
-      observerConfig[`${prefix}-TEXT-FIELD`] = {value: valuePropertyConfig};
-      observerConfig[`${prefix}-TEXT-AREA`] = {value: valuePropertyConfig};
-      observerConfig[`${prefix}-MENU-ITEM`] = {checked: valuePropertyConfig};
-      observerConfig[`${prefix}-SWITCH`] = {checked: valuePropertyConfig};
-      observerConfig[`${prefix}-TABS`] = {activeid: valuePropertyConfig};
-      nodeObserverLocator.useConfig(observerConfig);
+      nodeObserverLocator.useConfig(nodeObserverConfig);
     }).register(container);
   }
 
