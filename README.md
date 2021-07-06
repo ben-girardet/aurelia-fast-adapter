@@ -24,6 +24,18 @@ Aurelia.register(FASTAdapter);
 
 Now your Aurelia 2 application knows how to handle two-way bindings with all FAST components.
 
+### Change FAST prefix
+
+FAST web-components use the `fast-` prefix by default, but this can be changed for any implementation. You can reflect this prefix by configuring the registration as such:
+
+```ts
+// main.ts
+import { FASTAdapter } from "aurelia-fast-adapter";
+
+FASTAdapter.customize({withPrefix: 'ecos'}; // now FASTAdapter knows that your components use a different prefix, `ecos-` here
+```
+
+
 ## Load the FAST implementation of the Dialog Service
 
 The only required part is loading the custom settings and renderer instead of the default ones. This is accomplished in your `main.ts` like so:
