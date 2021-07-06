@@ -44,7 +44,6 @@ export class FASTAdapter {
       nodeObserverConfig[fullTag]['activeid'] = valuePropertyConfig;
     }
 
-    console.log('tags', tags);
     AppTask.beforeCreate(IContainer, container => {
       const attrSyntaxTransformer = container.get(IAttrMapper);
       const nodeObserverLocator = container.get(NodeObserverLocator);
