@@ -4,9 +4,7 @@ import { IAttrMapper, NodeObserverLocator, AppTask } from '@aurelia/runtime-html
 export class FASTAdapter {
 
   public static tags: {[key: string]: string[]} = {
-    'CALENDAR': ['date', 'dates', 'from', 'end'],
     'CHECKBOX': ['checked'],
-    'DATE-FIELD': ['value'],
     'MENU-ITEM': ['checked'],
     'RADIO': ['checked'],
     'RADIO-GROUP': ['checked'],

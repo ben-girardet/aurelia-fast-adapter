@@ -35,6 +35,13 @@ import { FASTAdapter } from "aurelia-fast-adapter";
 FASTAdapter.customize({withPrefix: 'ecos'}; // now FASTAdapter knows that your components use a different prefix, `ecos-` here
 ```
 
+### Register custom components
+
+Before to register the `FASTAdapter` one can extends the public static `tags` property in order to add more components. For exemple:
+
+```
+FASTAdapter.tags['DATE-FIELD'] = ['value'];
+```
 
 ## Load the FAST implementation of the Dialog Service
 
