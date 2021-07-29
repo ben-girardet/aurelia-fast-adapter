@@ -6,6 +6,7 @@ export class FASTAdapter {
   public static tags: {[key: string]: string[]} = {
     'CHECKBOX': ['checked'],
     'MENU-ITEM': ['checked'],
+    'NUMBER-FIELD': ['value'],
     'RADIO': ['checked'],
     'RADIO-GROUP': ['checked'],
     'SELECT': ['value'],
