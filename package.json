@@ -1,6 +1,6 @@
 {
   "name": "aurelia-fast-adapter",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Enables better interactions between Aurelia 2 applications and FAST web-components. Adds two-way binding for components and provides a FAST implementation of Aurelia Dialog Service.",
   "main": "dist/commonjs/index.js",
   "module": "dist/native-modules/index.js",
