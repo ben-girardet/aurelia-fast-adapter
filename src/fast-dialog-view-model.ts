@@ -6,7 +6,7 @@ export class FASTDialogViewModel implements ICustomElementViewModel {
 
   public async attached(): Promise<void> {
     return new Promise((resolve) => {
-      this.$controller.root.container.get(IPlatform).domReadQueue.queueTask(() => {
+      this.$controller.container.get(IPlatform).domReadQueue.queueTask(() => {
         const host = this.$controller.host;
         host.addEventListener('transitionend', () => {
           resolve();
@@ -18,7 +18,7 @@ export class FASTDialogViewModel implements ICustomElementViewModel {
 
   public async detaching(): Promise<void> {
     return new Promise((resolve) => {
-      this.$controller.root.container.get(IPlatform).domReadQueue.queueTask(() => {
+      this.$controller.container.get(IPlatform).domReadQueue.queueTask(() => {
         const host = this.$controller.host;
         host.addEventListener('transitionend', () => {
           resolve();
