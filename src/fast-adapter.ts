@@ -45,7 +45,7 @@ export class FASTAdapter {
       }
     }
 
-    AppTask.beforeCreate(IContainer, container => {
+    AppTask.creating(IContainer, container => {
       const attrSyntaxTransformer = container.get(IAttrMapper);
       const nodeObserverLocator = container.get(NodeObserverLocator);
       attrSyntaxTransformer.useTwoWay((el, property) => {
