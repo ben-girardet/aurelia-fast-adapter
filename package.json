@@ -27,7 +27,8 @@
   "peerDependencies": {
     "@aurelia/kernel": "latest",
     "@aurelia/runtime-html": "latest",
-    "@microsoft/fast-foundation": "^2.2.0"
+    "@aurelia/dialog": "latest",
+    "@microsoft/fast-foundation": "^2.47.0"
   },
   "devDependencies": {
     "concurrently": "^6.0.0",
