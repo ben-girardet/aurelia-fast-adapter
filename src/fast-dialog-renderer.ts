@@ -1,5 +1,6 @@
 import { IContainer, Registration } from '@aurelia/kernel';
-import { IDialogDomRenderer, IDialogDom, DefaultDialogDom, IDialogLoadedSettings, IPlatform } from '@aurelia/runtime-html';
+import { IDialogDomRenderer, IDialogDom, DefaultDialogDom, IDialogLoadedSettings } from '@aurelia/dialog';
+import { IPlatform } from '@aurelia/runtime-html'
 import { Dialog } from '@microsoft/fast-foundation';
 
 export class FASTDialogRenderer implements IDialogDomRenderer {

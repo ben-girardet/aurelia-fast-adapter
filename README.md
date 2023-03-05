@@ -51,7 +51,7 @@ The only required part is loading the custom settings and renderer instead of th
 
 ```ts
 // main.ts
-import { DialogConfiguration } from '@aurliea/runtime-html';
+import { DialogConfiguration, DialogService } from '@aurelia/dialog';
 import { FASTDialogGlobalSettings, FASTDialogRenderer } from "aurelia-fast-adapter";
 
 Aurelia..register(DialogConfiguration.customize((settings: FASTDialogGlobalSettings) => {
@@ -69,7 +69,7 @@ You might be using a different prefix than `fast-` when registering your FAST we
 
 ```ts
 // main.ts
-import { DialogConfiguration } from '@aurliea/runtime-html';
+import { DialogConfiguration, DialogService } from '@aurelia/dialog';
 import { FASTDialogGlobalSettings, FASTDialogRenderer } from "aurelia-fast-adapter";
 
 Aurelia..register(DialogConfiguration.customize((settings: FASTDialogGlobalSettings) => {
@@ -85,7 +85,7 @@ Depending on the FAST Dialog implementation, you might want the Dialog Service t
 
 ```ts
 // main.ts
-import { DialogConfiguration } from '@aurliea/runtime-html';
+import { DialogConfiguration, DialogService } from '@aurelia/dialog';
 import { FASTDialogGlobalSettings, FASTDialogRenderer } from "aurelia-fast-adapter";
 
 Aurelia..register(DialogConfiguration.customize((settings: FASTDialogGlobalSettings) => {
